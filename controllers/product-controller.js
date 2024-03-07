@@ -6,12 +6,7 @@ const {Product} = require('../models/Products')
         const { page = 1, name,...quer  } = req.query;
         const pageSize = 5;
         const skip = (page - 1) * pageSize;
-        console.log(quer)
-        let query = {};
-        if (name) {
-          query.name = { $regex: new RegExp(name, "i") };
-        }
-        const totalProducts = await Product.countDocuments(query);
+        const totalProducts = await Product.countDocuments(quer);
     
         if (totalProducts === 0) {
           throw new HttpError(404, `Products not found`);

@@ -1,11 +1,10 @@
-import { ctrlWrapper } from "../decorators/index.js";
-import Dashboard from "../models/dashboard.js";
-import Customer from "../models/customer.js";
-import { HttpError } from "../helpers/index.js";
-import Product from "../models/Products.js";
-import Supplier from "../models/supplier.js";
+const { ctrlWrapper,HttpError } = require("../helpers");
+const  {Dashboard}  = require("../models/dashboard.js") ;
+const  {Customer}  = require("../models/customer.js");
+const  {Product}  = require("../models/Products.js");
+const  {Supplier}  = require("../models/supplier.js");
 
-export const getDashboardData = async (req, res, next) => {
+ const getDashboardData = async (req, res, next) => {
   try {
     const { page = 1 } = req.query;
     const perPage = 6;
@@ -42,6 +41,6 @@ export const getDashboardData = async (req, res, next) => {
   }
 };
 
-export default {
-  getDashboardsData: ctrlWrapper(getDashboardData),
+module.exports = {
+  getDashboardData: ctrlWrapper(getDashboardData),
 };

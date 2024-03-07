@@ -97,10 +97,25 @@ const currentUser = async (req, res, next) => {
   }
 };
 
+const UserInfo = async (req, res,next) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      throw HttpError(401, "Not authorized");
+    }
+
+    res.json({
+      email: user.email,
+      name: user.name,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
   logout: ctrlWrapper(logout),
-  currentUser: ctrlWrapper(currentUser),
+  UserInfo: ctrlWrapper(UserInfo),
 };
