@@ -3,7 +3,7 @@ const { Product } = require("../models/Products");
 
 const ListProducts = async (req, res, next) => {
   try {
-    const { page = 1, name, ...quer } = req.query;
+    const { page = 1, name } = req.query;
     const pageSize = 5;
     const skip = (page - 1) * pageSize;
 
@@ -19,7 +19,7 @@ const ListProducts = async (req, res, next) => {
     if (skip >= totalProducts) {
       throw new HttpError(404, `No more products available on page ${page}`);
     }
-    const products = await Product.find(quer).skip(skip).limit(pageSize);
+    const products = await Product.find(query).skip(skip).limit(pageSize);
 
     res.status(200).json({
       totalProducts,

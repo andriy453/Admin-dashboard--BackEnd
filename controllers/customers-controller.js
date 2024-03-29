@@ -3,7 +3,7 @@ const { Customer } = require("../models/customer");
 
 const ListCustomer = async (req, res, next) => {
   try {
-    const { page = 1, name, ...quer } = req.query;
+    const { page = 1, name } = req.query;
     const pageSize = 5;
     const skip = (page - 1) * pageSize;
     let query = {};
@@ -18,7 +18,7 @@ const ListCustomer = async (req, res, next) => {
     if (skip >= totalCustomer) {
       throw new HttpError(404, `No more Customer available on page ${page}`);
     }
-    const customer = await Customer.find(quer).skip(skip).limit(pageSize);
+    const customer = await Customer.find(query).skip(skip).limit(pageSize);
 
     res.status(200).json({
       totalCustomer,

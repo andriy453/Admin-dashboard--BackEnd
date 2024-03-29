@@ -2,7 +2,7 @@ const { ctrlWrapper, HttpError } = require("../helpers");
 const { Supplier } = require("../models/supplier");
 const ListSupplier = async (req, res, next) => {
   try {
-    const { page = 1, name, ...quer } = req.query;
+    const { page = 1, name } = req.query;
     const pageSize = 5;
     const skip = (page - 1) * pageSize;
     let query = {};
@@ -17,7 +17,7 @@ const ListSupplier = async (req, res, next) => {
     if (skip >= totalSupplier) {
       throw new HttpError(404, `No more supplier available on page ${page}`);
     }
-    const supplier = await Supplier.find(quer).skip(skip).limit(pageSize);
+    const supplier = await Supplier.find(query).skip(skip).limit(pageSize);
 
     res.status(200).json({
       totalSupplier,
