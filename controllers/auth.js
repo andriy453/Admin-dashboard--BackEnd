@@ -70,28 +70,8 @@ const login = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     const { _id: id } = req.user;
-    const user = await User.findById(id);
-    if (!user) {
-      res.status(209).json({ messeage: "Email in use" });
-      throw HttpError(401, "Not authorized");
-    }
-
     await User.findByIdAndUpdate(id, { token: "" });
     res.status(204).json();
-  } catch (error) {
-    next(error);
-  }
-};
-const currentUser = async (req, res, next) => {
-  try {
-    const user = req.user;
-    if (!user) {
-      throw HttpError(401, "Not authorized");
-    }
-
-    res.json({
-      email: user.email,
-    });
   } catch (error) {
     next(error);
   }

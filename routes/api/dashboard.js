@@ -14,12 +14,12 @@ const router = express.Router();
 router.get("/dashboard", authenticate, ctrlD.getDashboardData);
 router.get("/products", authenticate, ctrl.ListProducts);
 router.post("/products",validateBody(productAddSchema), authenticate, ctrl.addProduct);
-router.post("/products/:productId", authenticate, ctrl.deleteById);
-router.put("/products/:productId", authenticate, ctrl.updateProduct);
+router.delete("/products/:productId",authenticate, ctrl.deleteById);
+router.put("/products/:productId",validateBody(productAddSchema), authenticate, ctrl.updateProduct);
 router.get("/suppliers", authenticate, ctrlS.ListSupplier);
 router.post("/suppliers",validateBody(supplierAddSchema), authenticate, ctrlS.addSupplier);
 router.post("/suppliers/:supplierId", authenticate, ctrlS.deleteById);
-router.put("/suppliers/:supplierId", authenticate, ctrlS.updateSupplier);
+router.put("/suppliers/:supplierId", validateBody(supplierAddSchema), authenticate, ctrlS.updateSupplier);
 router.get("/orders", authenticate, ctrlO.ListOrder);
 router.get("/customers", authenticate, ctrlC.ListCustomer);
 
