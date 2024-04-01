@@ -18,7 +18,7 @@ router.delete("/products/:productId",authenticate, ctrl.deleteById);
 router.put("/products/:productId",validateBody(productAddSchema), authenticate, ctrl.updateProduct);
 router.get("/suppliers", authenticate, ctrlS.ListSupplier);
 router.post("/suppliers",validateBody(supplierAddSchema), authenticate, ctrlS.addSupplier);
-router.post("/suppliers/:supplierId", authenticate, ctrlS.deleteById);
+router.delete("/suppliers/:supplierId", authenticate, ctrlS.deleteById);
 router.put("/suppliers/:supplierId", validateBody(supplierAddSchema), authenticate, ctrlS.updateSupplier);
 router.get("/orders", authenticate, ctrlO.ListOrder);
 router.get("/customers", authenticate, ctrlC.ListCustomer);
